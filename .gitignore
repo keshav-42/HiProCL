@@ -1,0 +1,35 @@
+# Data
+LC25000/
+data/
+datasets/
+
+# Checkpoints and outputs
+checkpoints/
+outputs/
+runs/
+*.pth
+*.pt
+*.ckpt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

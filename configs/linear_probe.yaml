@@ -1,0 +1,47 @@
+# Linear Probing Configuration for DeepFashion In-Shop
+
+# Dataset Configuration
+data_path: "./DeepFashion"
+eval_partition_file: "./list_eval_partition.txt"
+image_size: 224
+
+# Linear Probe Training
+epochs: 100
+learning_rate: 0.01  # Higher than pretraining (only training linear layer)
+batch_size: 256      # Larger batch for faster training
+weight_decay: 0.0    # No weight decay for linear classifier
+
+# Optimizer: SGD with momentum (standard for linear probing)
+optimizer: "sgd"
+momentum: 0.9
+
+# Data Loading
+num_workers: 4
+pin_memory: true
+
+# Reproducibility
+seed: 42
+
+# Evaluation Levels
+# L0: Category (17 classes)
+# L1: Product (3,997 classes in train)
+# L2: Variation (6,356 classes in train)
+
+# Expected Performance (depends on pretraining method):
+#
+# SimCLR Baseline:
+#   L0 (Category):  70-80% accuracy
+#   L1 (Product):   30-40% accuracy
+#   L2 (Variation): 25-35% accuracy
+#
+# 3-Level Hierarchical:
+#   L0 (Category):  85-95% accuracy
+#   L1 (Product):   50-65% accuracy
+#   L2 (Variation): 40-55% accuracy
+
+# Notes:
+# 1. Backbone weights are FROZEN during linear probing
+# 2. Only the linear classifier head is trained
+# 3. This evaluates the quality of learned representations
+# 4. Higher accuracy = better structured representations
+# 5. Use same config for both SimCLR and hierarchical checkpoints for fair comparison

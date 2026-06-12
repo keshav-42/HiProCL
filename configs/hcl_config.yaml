@@ -1,0 +1,58 @@
+# Improved Hierarchical Contrastive Learning Configuration
+# Batch Size 256 Configuration
+
+# Data Configuration
+data_path: "./LC25000"
+image_size: 224
+color_jitter_strength: 1.0
+
+# Model Configuration
+backbone_dim: 768
+projection_hidden_dim: 2048
+projection_dim: 128
+pretrained_path: "./ctranspath.pth"
+
+# Loss Function Selection
+loss_type: "improved"  # ImprovedHierarchicalLoss with all components
+
+# Improved Loss Weights
+alpha: 1.0    # L_instance weight (SimCLR-style instance discrimination)
+beta: 0.5     # L_subtype weight (supervised contrastive at subtype level)
+gamma: 0.3    # L_organ weight (supervised contrastive at organ level)
+lambda: 0.2   # L_prototypical weight (prototypical + separation)
+
+# Temperature
+temperature: 0.5
+
+# Prototype Configuration
+num_subtypes: 5  # LC25000 has 5 subtypes
+num_organs: 2    # LC25000 has 2 organs (lung, colon)
+prototype_momentum: 0.99
+
+# Training Configuration
+batch_size: 256
+epochs: 35
+learning_rate: 0.0005  # Base LR for BS 256
+weight_decay: 0.0001
+min_lr: 0.000001
+
+# Warmup
+warmup_epochs: 5
+warmup_lr: 0.0001
+
+# Gradient Clipping
+max_grad_norm: 1.0
+
+# Data Loading
+num_workers: 4
+pin_memory: true
+
+# Checkpointing
+save_every: 10
+
+# Reproducibility
+seed: 42
+
+# Debugging
+log_loss_components: true
+log_positive_pairs: false

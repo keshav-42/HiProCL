@@ -1,0 +1,44 @@
+# Ablation: Only L_subtype (Supervised Contrastive - Subtype)
+
+data_path: "./LC25000"
+image_size: 224
+color_jitter_strength: 1.0
+backbone_dim: 768
+projection_hidden_dim: 2048
+projection_dim: 128
+pretrained_path: "./ctranspath.pth"
+
+loss_type: "ablation"
+
+use_instance: false
+use_subtype: true
+use_organ: false
+use_prototypical: false
+
+alpha: 1.0
+beta: 0.5
+gamma: 0.3
+lambda: 0.2
+temperature: 0.5
+
+num_subtypes: 5
+num_organs: 2
+prototype_momentum: 0.99
+
+batch_size: 64
+epochs: 40
+learning_rate: 0.0005
+weight_decay: 0.0001
+min_lr: 0.000001
+
+warmup_epochs: 5
+warmup_lr: 0.0001
+max_grad_norm: 1.0
+
+num_workers: 4
+pin_memory: true
+save_every: 10
+seed: 42
+
+log_loss_components: true
+log_positive_pairs: false
